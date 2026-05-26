@@ -142,7 +142,7 @@
             </div>
         </div>
 
-        <a href="https://t.me/+4WC7nxc7edQ3MWQ9" target="_blank" onclick="fireVolumeLead()" class="btn">
+        <a href="https://t.me/+4WC7nxc7edQ3MWQ9" onclick="fireVolumeLead(event)" class="btn">
             🚀 Join Free Community Now
         </a>
         <div class="btn-sub">100% Free • No Hidden Fees</div>
@@ -154,18 +154,24 @@
     </div>
 
     <script>
-        // --- UPDATED PIXEL TRACKING (NO REDIRECT CRASH) ---
-        function fireVolumeLead() {
+        // --- 100% FAIL-PROOF PIXEL TRACKING & REDIRECTION LOGIC ---
+        function fireVolumeLead(event) {
+            event.preventDefault(); 
+            
+            const targetUrl = event.currentTarget.href; 
+
             try {
                 if (typeof fbq !== 'undefined') {
                     fbq('track', 'Lead');
-                    console.log("✅ Lead Event Fired Successfully!");
+                    console.log("✅ Lead Event Fired!");
                 }
             } catch (error) {
-                console.log("⚠️ Pixel error:", error);
+                console.log("⚠️ Pixel bypassed:", error);
             }
-            // Note: Removed preventDefault and setTimeout. 
-            // The link now opens naturally in a new tab without JS interfering, and the Pixel fires in this original tab.
+            
+            setTimeout(() => {
+                window.location.href = targetUrl;
+            }, 450);
         }
     </script>
 </body>
